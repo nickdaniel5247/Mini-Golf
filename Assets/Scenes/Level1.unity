@@ -128,6 +128,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1518679281}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1094490737 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8abbd5dd4ee94fd4582558992faa22ef,
+    type: 3}
+  m_PrefabInstance: {fileID: 1595068787}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1518679281
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -272,7 +278,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8abbd5dd4ee94fd4582558992faa22ef,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1595068791}
   m_SourcePrefab: {fileID: 100100000, guid: 8abbd5dd4ee94fd4582558992faa22ef, type: 3}
 --- !u!4 &1595068788 stripped
 Transform:
@@ -280,6 +290,28 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1595068787}
   m_PrefabAsset: {fileID: 0}
+--- !u!64 &1595068791
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1094490737}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -8254804224689600507, guid: 8abbd5dd4ee94fd4582558992faa22ef, type: 3}
 --- !u!1 &1745131973
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,7 +411,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1745131973}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.122787856, y: 0.6963643, z: -0.122787856, w: 0.6963643}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.5, z: -4.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -387,7 +419,7 @@ Transform:
   - {fileID: 1595068788}
   - {fileID: 926043620}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: -20}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &1911421274
 GameObject:
   m_ObjectHideFlags: 0
