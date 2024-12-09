@@ -5417,7 +5417,7 @@ MonoBehaviour:
   levelSelectionPanel: {fileID: 2067186861}
   hudPanel: {fileID: 1521271968}
   pauseMenuPanel: {fileID: 314574325}
-  loadingScreenPanel: {fileID: 959339908}
+  loadingScreenPanel: {fileID: 1764146283}
   strokeCountText: {fileID: 850703460}
   levelNumberText: {fileID: 793037060}
   loadingProgressBar: {fileID: 1632512584}
