@@ -11,6 +11,8 @@ public class Ball : MonoBehaviour
     private CinemachineFreeLook cinemachineFreeLook;
     private const int mouseDownCode = 0;
 
+    public float maxForce = 350f;
+
     void Awake()
     {
         rigidBody = GetComponent<Rigidbody>();
@@ -55,6 +57,7 @@ public class Ball : MonoBehaviour
         Vector3 freelookCamForward = cinemachineFreeLook.State.FinalOrientation.normalized * Vector3.forward;
         freelookCamForward *= mouseOffset;
 
+        freelookCamForward = Vector3.ClampMagnitude(freelookCamForward, maxForce);
         rigidBody.AddForce(freelookCamForward);
     }
 }
