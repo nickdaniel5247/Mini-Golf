@@ -49,8 +49,8 @@ public class UIManager : MonoBehaviour
         }
 
         // Initialize volume sliders with the current values from GameManager
-        musicVolumeSlider.value = gameManager.musicVolume;
-        sfxVolumeSlider.value = gameManager.sfxVolume;
+        musicVolumeSlider.value = GameManager.musicVolume;
+        sfxVolumeSlider.value = GameManager.sfxVolume;
 
         // Add listeners to the sliders
         musicVolumeSlider.onValueChanged.AddListener(OnMusicVolumeChanged);
