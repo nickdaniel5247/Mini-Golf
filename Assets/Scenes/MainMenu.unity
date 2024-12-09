@@ -4613,6 +4613,7 @@ MonoBehaviour:
   sfxVolume: 1
   totalLevels: 7
   currentLevel: 1
+  uiManagerObject: {fileID: 1618768661}
 --- !u!1 &1455319023
 GameObject:
   m_ObjectHideFlags: 0
@@ -5422,6 +5423,7 @@ MonoBehaviour:
   loadingProgressBar: {fileID: 1632512584}
   musicVolumeSlider: {fileID: 1102252944}
   sfxVolumeSlider: {fileID: 1793710022}
+  gameManagerObject: {fileID: 1440942093}
 --- !u!4 &1618768663
 Transform:
   m_ObjectHideFlags: 0

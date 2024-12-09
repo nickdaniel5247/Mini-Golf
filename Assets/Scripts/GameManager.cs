@@ -6,12 +6,10 @@ using System.IO;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
-
     public enum GameState { MainMenu, SettingsMenu, LevelSelection, Playing, Paused }
-    public GameState CurrentState { get; private set; }
+    static public GameState CurrentState { get; private set; }
 
-    private PlayerData playerData;
+    static private PlayerData playerData;
 
     public float musicVolume = 1f;
     public float sfxVolume = 1f;
@@ -19,37 +17,30 @@ public class GameManager : MonoBehaviour
     public int totalLevels = 7;
     public int currentLevel = 1;
 
+    [Header("UI Manager Object (Assign in Inspector)")]
+    public GameObject uiManagerObject;
     private UIManager uiManager;
+
     private AudioManager audioManager;
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-            LoadPlayerData();
+        LoadPlayerData();
 
-            // Attempt to get instances:
-            uiManager = UIManager.Instance;
-            audioManager = AudioManager.Instance;
+        // Attempt to get instances:
+        uiManager = uiManagerObject.GetComponent<UIManager>();
+        audioManager = AudioManager.Instance;
 
-            if (uiManager == null)
-                Debug.LogWarning("UIManager.Instance not found in GameManager Awake.");
-            if (audioManager == null)
-                Debug.LogWarning("AudioManager.Instance not found in GameManager Awake.");
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        if (uiManager == null)
+            Debug.LogError("UIManager.Instance not found in GameManager Awake.");
+        if (audioManager == null)
+            Debug.LogError("AudioManager.Instance not found in GameManager Awake.");
     }
 
     private void Start()
     {
         CurrentState = GameState.MainMenu;
-        if (uiManager != null)
-            uiManager.ShowMainMenu();
+        uiManager.ShowMainMenu();
 
         ApplySettings();
     }
@@ -61,27 +52,27 @@ public class GameManager : MonoBehaviour
         currentLevel = levelNumber;
         CurrentState = GameState.Playing;
         StartCoroutine(LoadLevelAsync("Level" + currentLevel));
-        uiManager?.ShowHUD();
-        uiManager?.UpdateLevelNumber(currentLevel);
+        uiManager.ShowHUD();
+        uiManager.UpdateLevelNumber(currentLevel);
     }
 
     public void ReturnToMainMenu()
     {
         CurrentState = GameState.MainMenu;
         SceneManager.LoadScene("MainMenu");
-        uiManager?.ShowMainMenu();
+        uiManager.ShowMainMenu();
     }
 
     public void OpenSettings()
     {
         CurrentState = GameState.SettingsMenu;
-        uiManager?.ShowSettingsMenu();
+        uiManager.ShowSettingsMenu();
     }
 
     public void OpenLevelSelection()
     {
         CurrentState = GameState.LevelSelection;
-        uiManager?.ShowLevelSelection();
+        uiManager.ShowLevelSelection();
     }
 
     public void PauseGame()
@@ -90,7 +81,7 @@ public class GameManager : MonoBehaviour
         {
             CurrentState = GameState.Paused;
             Time.timeScale = 0f;
-            uiManager?.ShowPauseMenu();
+            uiManager.ShowPauseMenu();
         }
     }
 
@@ -100,7 +91,7 @@ public class GameManager : MonoBehaviour
         {
             CurrentState = GameState.Playing;
             Time.timeScale = 1f;
-            uiManager?.HidePauseMenu();
+            uiManager.HidePauseMenu();
         }
     }
 
@@ -146,7 +137,7 @@ public class GameManager : MonoBehaviour
     public void SetMusicVolume(float volume)
     {
         musicVolume = volume;
-        audioManager?.SetMusicVolume(volume);
+        audioManager.SetMusicVolume(volume);
         playerData.musicVolume = volume;
         SavePlayerData();
     }
@@ -154,15 +145,15 @@ public class GameManager : MonoBehaviour
     public void SetSFXVolume(float volume)
     {
         sfxVolume = volume;
-        audioManager?.SetEffectsVolume(volume);
+        audioManager.SetEffectsVolume(volume);
         playerData.sfxVolume = volume;
         SavePlayerData();
     }
 
     private void ApplySettings()
     {
-        audioManager?.SetMusicVolume(musicVolume);
-        audioManager?.SetEffectsVolume(sfxVolume);
+        audioManager.SetMusicVolume(musicVolume);
+        audioManager.SetEffectsVolume(sfxVolume);
     }
 
     #endregion
@@ -215,17 +206,17 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator LoadLevelAsync(string sceneName)
     {
-        uiManager?.ShowLoadingScreen();
+        uiManager.ShowLoadingScreen();
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
 
         while (!operation.isDone)
         {
             float progress = Mathf.Clamp01(operation.progress / 0.9f);
-            uiManager?.UpdateLoadingProgress(progress);
+            uiManager.UpdateLoadingProgress(progress);
             yield return null;
         }
 
-        uiManager?.HideLoadingScreen();
+        uiManager.HideLoadingScreen();
     }
 
     #endregion

@@ -5,8 +5,6 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-    public static UIManager Instance;
-
     [Header("UI Panels (Assign in Inspector)")]
     public GameObject mainMenuPanel;
     public GameObject settingsPanel;
@@ -26,29 +24,23 @@ public class UIManager : MonoBehaviour
     public Slider musicVolumeSlider;
     public Slider sfxVolumeSlider;
 
+    [Header("Game Manager Object (Assign in Inspector)")]
+    public GameObject gameManagerObject;
+    private GameManager gameManager;
+
     private void Awake()
     {
-        if (Instance == null)
+        gameManager = gameManagerObject.GetComponent<GameManager>();
+
+        if (gameManager == null)
         {
-            Instance = this;
-            // Optional: If you want UI to persist across scene loads:
-            // DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
+            Debug.LogError("gameManager not found in UIManager. Ensure GameManager is present in the scene.");
+            return;
         }
     }
 
     private void Start()
     {
-        // Check if GameManager is available
-        if (GameManager.Instance == null)
-        {
-            Debug.LogWarning("GameManager.Instance not found at UIManager Start. Ensure GameManager is present in the scene.");
-            return;
-        }
-
         // Check if sliders are assigned before using them
         if (musicVolumeSlider == null || sfxVolumeSlider == null)
         {
@@ -57,8 +49,8 @@ public class UIManager : MonoBehaviour
         }
 
         // Initialize volume sliders with the current values from GameManager
-        musicVolumeSlider.value = GameManager.Instance.musicVolume;
-        sfxVolumeSlider.value = GameManager.Instance.sfxVolume;
+        musicVolumeSlider.value = gameManager.musicVolume;
+        sfxVolumeSlider.value = gameManager.sfxVolume;
 
         // Add listeners to the sliders
         musicVolumeSlider.onValueChanged.AddListener(OnMusicVolumeChanged);
@@ -173,18 +165,12 @@ public class UIManager : MonoBehaviour
 
     private void OnMusicVolumeChanged(float value)
     {
-        if (GameManager.Instance != null)
-            GameManager.Instance.SetMusicVolume(value);
-        else
-            Debug.LogWarning("GameManager.Instance not found when changing music volume.");
+        gameManager.SetMusicVolume(value);
     }
 
     private void OnSFXVolumeChanged(float value)
     {
-        if (GameManager.Instance != null)
-            GameManager.Instance.SetSFXVolume(value);
-        else
-            Debug.LogWarning("GameManager.Instance not found when changing SFX volume.");
+        gameManager.SetSFXVolume(value);
     }
 
     #endregion
@@ -193,18 +179,12 @@ public class UIManager : MonoBehaviour
 
     public void OnStartGameButtonPressed()
     {
-        if (GameManager.Instance != null)
-            GameManager.Instance.OpenLevelSelection();
-        else
-            Debug.LogWarning("GameManager.Instance not found when Start button pressed.");
+        gameManager.OpenLevelSelection();
     }
 
     public void OnSettingsButtonPressed()
     {
-        if (GameManager.Instance != null)
-            GameManager.Instance.OpenSettings();
-        else
-            Debug.LogWarning("GameManager.Instance not found when Settings button pressed.");
+        gameManager.OpenSettings();
     }
 
     public void OnQuitButtonPressed()
@@ -214,26 +194,17 @@ public class UIManager : MonoBehaviour
 
     public void OnResumeGameButtonPressed()
     {
-        if (GameManager.Instance != null)
-            GameManager.Instance.ResumeGame();
-        else
-            Debug.LogWarning("GameManager.Instance not found when Resume button pressed.");
+        gameManager.ResumeGame();
     }
 
     public void OnRestartLevelButtonPressed()
     {
-        if (GameManager.Instance != null)
-            GameManager.Instance.RestartLevel();
-        else
-            Debug.LogWarning("GameManager.Instance not found when Restart button pressed.");
+        gameManager.RestartLevel();
     }
 
     public void OnReturnToMainMenuButtonPressed()
     {
-        if (GameManager.Instance != null)
-            GameManager.Instance.ReturnToMainMenu();
-        else
-            Debug.LogWarning("GameManager.Instance not found when ReturnToMainMenu button pressed.");
+        gameManager.ReturnToMainMenu();
     }
 
     #endregion
