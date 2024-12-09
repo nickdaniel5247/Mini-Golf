@@ -52,8 +52,11 @@ public class GameManager : MonoBehaviour
         currentLevel = levelNumber;
         CurrentState = GameState.Playing;
         StartCoroutine(LoadLevelAsync("Level" + currentLevel));
-        uiManager.ShowHUD();
-        uiManager.UpdateLevelNumber(currentLevel);
+
+        //May not be necessary, managers have switched to instances now
+        //uiManager.ShowHUD();
+        //uiManager.UpdateLevelNumber(currentLevel); <- This needs to be accommodated for however
+        //Best option would be public variable in UI Manager assigned in editor for each level
     }
 
     public void ReturnToMainMenu()
