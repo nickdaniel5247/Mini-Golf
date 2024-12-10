@@ -9,9 +9,13 @@ public class Ball : MonoBehaviour
     private Rigidbody rigidBody;
     private float startingMouseHeight;
     private CinemachineFreeLook cinemachineFreeLook;
+
     private const int mouseDownCode = 0;
+    private const float speedEpsilon = 0.01f;
 
     public float maxForce = 350f;
+    public float deaccelerationStart = 0.1f;
+    public float deaccelerationSpeed = 2.5f;
 
     void Awake()
     {
@@ -48,8 +52,26 @@ public class Ball : MonoBehaviour
         }
     }
 
+    void FixedUpdate()
+    {
+        //Help stop ball when slow enough
+        if (rigidBody.velocity.magnitude > speedEpsilon && rigidBody.velocity.magnitude < deaccelerationStart)
+        {
+            float speed = deaccelerationSpeed * Time.deltaTime;
+
+            rigidBody.velocity = new Vector3(Mathf.Lerp(rigidBody.velocity.x, 0, speed), 0, Mathf.Lerp(rigidBody.velocity.z, 0, speed));
+            rigidBody.angularVelocity = new Vector3(Mathf.Lerp(rigidBody.angularVelocity.x, 0, speed), 0, Mathf.Lerp(rigidBody.angularVelocity.z, 0, speed));
+        }
+    }
+
     void shoot(float mouseOffset)
     {
+        if (!rigidBody.IsSleeping())
+        {
+            //We are in motion, no further movement should be done
+            return;
+        }
+
         //Can't shoot backwards
         mouseOffset = math.abs(mouseOffset);
 
