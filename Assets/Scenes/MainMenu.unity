@@ -404,7 +404,7 @@ GameObject:
   - component: {fileID: 45373398}
   - component: {fileID: 45373397}
   m_Layer: 5
-  m_Name: Button_LVL2
+  m_Name: Button_LVL1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -474,7 +474,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 45373398}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1440942095}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &45373398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -670,7 +682,7 @@ GameObject:
   - component: {fileID: 110559362}
   - component: {fileID: 110559361}
   m_Layer: 5
-  m_Name: Button_LVL4
+  m_Name: Button_LVL3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -740,7 +752,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 110559362}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1440942095}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &110559362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -828,7 +852,7 @@ GameObject:
   - component: {fileID: 171658370}
   - component: {fileID: 171658369}
   m_Layer: 5
-  m_Name: Button_LVL1
+  m_Name: Button_LVL0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -899,13 +923,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1618768661}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1440942095}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -4384,7 +4408,7 @@ GameObject:
   - component: {fileID: 1383424118}
   - component: {fileID: 1383424117}
   m_Layer: 5
-  m_Name: Button_LVL5
+  m_Name: Button_LVL4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4454,7 +4478,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1383424118}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1440942095}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1383424118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4623,7 +4659,7 @@ GameObject:
   - component: {fileID: 1455319026}
   - component: {fileID: 1455319025}
   m_Layer: 5
-  m_Name: Button_LVL3
+  m_Name: Button_LVL2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4693,7 +4729,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1455319026}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1440942095}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1455319026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5546,7 +5594,7 @@ GameObject:
   - component: {fileID: 1677704287}
   - component: {fileID: 1677704286}
   m_Layer: 5
-  m_Name: Button_LVL6
+  m_Name: Button_LVL5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5616,7 +5664,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1677704287}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1440942095}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1677704287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6672,7 +6732,7 @@ GameObject:
   - component: {fileID: 1969849431}
   - component: {fileID: 1969849430}
   m_Layer: 5
-  m_Name: Button_LVL7
+  m_Name: Button_LVL6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6742,7 +6802,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1969849431}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1440942095}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 6
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1969849431
 MonoBehaviour:
   m_ObjectHideFlags: 0

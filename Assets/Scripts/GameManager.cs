@@ -48,6 +48,12 @@ public class GameManager : MonoBehaviour
 
     public void StartGame(int levelNumber)
     {
+        if (levelNumber > playerData.currentLevel)
+        {
+            Debug.LogWarning("Level " + levelNumber + "isn't unlocked yet.");
+            return;
+        }
+
         CurrentState = GameState.Playing;
         StartCoroutine(LoadLevelAsync("Level" + levelNumber));
 
