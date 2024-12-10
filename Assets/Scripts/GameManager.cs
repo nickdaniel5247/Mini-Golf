@@ -7,7 +7,7 @@ using System.IO;
 public class GameManager : MonoBehaviour
 {
     public enum GameState { MainMenu, SettingsMenu, LevelSelection, Playing, Paused }
-    static public GameState CurrentState { get; private set; }
+    static public GameState CurrentState { get; private set; } = GameState.MainMenu;
 
     static private PlayerData playerData;
 
@@ -22,6 +22,12 @@ public class GameManager : MonoBehaviour
 
     private AudioManager audioManager;
 
+    [Header("Prefabs to spawn (Assign in Inspector)")]
+    public GameObject ball;
+    public GameObject ballCamera;
+    
+    public GameObject spawnPoint;
+
     private void Awake()
     {
         LoadPlayerData();
@@ -34,14 +40,28 @@ public class GameManager : MonoBehaviour
             Debug.LogError("UIManager.Instance not found in GameManager Awake.");
         if (audioManager == null)
             Debug.LogError("AudioManager.Instance not found in GameManager Awake.");
+        if (spawnPoint == null)
+            Debug.LogWarning("No Spawn Point provided.");
     }
 
     private void Start()
     {
-        CurrentState = GameState.MainMenu;
-        uiManager.ShowMainMenu();
+        switch (CurrentState)
+        {
+        case GameState.MainMenu:
+            uiManager.ShowMainMenu();
+            ApplySettings();
+            break;
+        case GameState.Playing:
+            uiManager.ShowHUD();
+            ball = Instantiate(ball, spawnPoint.transform.position, spawnPoint.transform.rotation);
+            ballCamera = Instantiate(ballCamera, spawnPoint.transform.position, spawnPoint.transform.rotation);
+            break;
+        default:
+            Debug.LogError("Unexpected starting state " + CurrentState + " for GameManager.");
+            break;
+        }
 
-        ApplySettings();
     }
 
     #region Game State Management
