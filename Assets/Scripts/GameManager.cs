@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
             Debug.LogError("UIManager.Instance not found in GameManager Awake.");
         if (audioManager == null)
             Debug.LogError("AudioManager.Instance not found in GameManager Awake.");
-        if (spawnPoint == null)
+        if (spawnPoint == null && CurrentState != GameState.MainMenu)
             Debug.LogWarning("No Spawn Point provided.");
     }
 
