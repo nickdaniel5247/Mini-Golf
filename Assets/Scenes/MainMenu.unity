@@ -5420,6 +5420,14 @@ MonoBehaviour:
   musicVolumeSlider: {fileID: 1102252944}
   sfxVolumeSlider: {fileID: 1793710022}
   gameManagerObject: {fileID: 1440942093}
+  levelButtons:
+  - {fileID: 171658367}
+  - {fileID: 45373395}
+  - {fileID: 1455319023}
+  - {fileID: 110559359}
+  - {fileID: 1383424115}
+  - {fileID: 1677704284}
+  - {fileID: 1969849428}
 --- !u!4 &1618768663
 Transform:
   m_ObjectHideFlags: 0

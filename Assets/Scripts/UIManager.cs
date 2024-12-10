@@ -2,9 +2,12 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
 
 public class UIManager : MonoBehaviour
 {
+    private const string levelLockedObjectName = "LevelLocked";
+
     [Header("UI Panels (Assign in Inspector)")]
     public GameObject mainMenuPanel;
     public GameObject settingsPanel;
@@ -27,6 +30,9 @@ public class UIManager : MonoBehaviour
     [Header("Game Manager Object (Assign in Inspector)")]
     public GameObject gameManagerObject;
     private GameManager gameManager;
+
+    [Header("Buttons for each level (Assign in Inspector)")]
+    public List<GameObject> levelButtons;
 
     private void Awake()
     {
@@ -55,9 +61,41 @@ public class UIManager : MonoBehaviour
         // Add listeners to the sliders
         musicVolumeSlider.onValueChanged.AddListener(OnMusicVolumeChanged);
         sfxVolumeSlider.onValueChanged.AddListener(OnSFXVolumeChanged);
+
+        for (int i = 0; i < levelButtons.Count; ++i)
+        {
+            bool isUnlocked = gameManager.IsLevelUnlocked(i);
+            SetLevelLock(i, isUnlocked);
+        }
     }
 
     #region UI Panel Management
+
+    private void SetLevelLock(int level, bool isUnlocked)
+    {
+        if (level < 0 || level >= levelButtons.Count)
+        {
+            return;
+        }
+
+        levelButtons[level].GetComponent<Button>().enabled = isUnlocked;
+        bool foundChildLocked = false;
+        
+        foreach (Transform child in levelButtons[level].transform)
+        {
+            if (child.name == levelLockedObjectName)
+            {
+                child.GetComponent<RawImage>().enabled = !isUnlocked;
+                foundChildLocked = true;
+                break;
+            }
+        }
+
+        if (!foundChildLocked)
+        {
+            Debug.LogWarning("Failed to find level " + level + "'s locked image.");
+        }
+    }
 
     public void ShowMainMenu()
     {
