@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
     static public float sfxVolume = 1f;
 
     private const int totalLevels = 7;
-    public int currentLevel { get; private set; } = 1;
 
     [Header("UI Manager Object (Assign in Inspector)")]
     public GameObject uiManagerObject;
@@ -49,9 +48,8 @@ public class GameManager : MonoBehaviour
 
     public void StartGame(int levelNumber)
     {
-        currentLevel = levelNumber;
         CurrentState = GameState.Playing;
-        StartCoroutine(LoadLevelAsync("Level" + currentLevel));
+        StartCoroutine(LoadLevelAsync("Level" + levelNumber));
 
         //May not be necessary, managers have switched to instances now
         //uiManager.ShowHUD();
@@ -103,7 +101,7 @@ public class GameManager : MonoBehaviour
         if (CurrentState == GameState.Playing || CurrentState == GameState.Paused)
         {
             Time.timeScale = 1f;
-            SceneManager.LoadScene("Level" + currentLevel);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
@@ -113,15 +111,15 @@ public class GameManager : MonoBehaviour
 
     public bool IsLevelUnlocked(int levelNumber)
     {
-        return playerData.unlockedLevels.Contains(levelNumber);
+        return playerData.currentLevel >= levelNumber;
     }
 
     public void UnlockNextLevel()
     {
-        int nextLevel = currentLevel + 1;
-        if (nextLevel <= totalLevels && !playerData.unlockedLevels.Contains(nextLevel))
+        int nextLevel = playerData.currentLevel + 1;
+        if (nextLevel < totalLevels && playerData.currentLevel < nextLevel)
         {
-            playerData.unlockedLevels.Add(nextLevel);
+            playerData.currentLevel = nextLevel;
             SavePlayerData();
         }
     }
@@ -168,7 +166,7 @@ public class GameManager : MonoBehaviour
     {
         public float musicVolume = 1f;
         public float sfxVolume = 1f;
-        public List<int> unlockedLevels = new List<int>();
+        public int currentLevel = 0; //0-based indexing
     }
 
     private void LoadPlayerData()
@@ -183,7 +181,6 @@ public class GameManager : MonoBehaviour
         else
         {
             playerData = new PlayerData();
-            playerData.unlockedLevels.Add(1);
             SavePlayerData();
         }
 
