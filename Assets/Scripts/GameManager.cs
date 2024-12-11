@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     {
         LoadPlayerData();
 
-        // Attempt to get instances:
+        //Attempt to get instances
         uiManager = uiManagerObject.GetComponent<UIManager>();
         audioManager = AudioManager.Instance;
 
@@ -42,6 +42,9 @@ public class GameManager : MonoBehaviour
             Debug.LogError("AudioManager.Instance not found in GameManager Awake.");
         if (spawnPoint == null && CurrentState != GameState.MainMenu)
             Debug.LogWarning("No Spawn Point provided.");
+
+        //FPS invariant sensitivity
+        Cinemachine.CinemachineCore.GetInputAxis = (axisName) => Input.GetAxis(axisName) / Time.unscaledDeltaTime;
     }
 
     private void Start()
