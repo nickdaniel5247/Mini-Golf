@@ -71,6 +71,14 @@ public class GameManager : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseGame();
+        }
+    }
+
     #region Game State Management
 
     public void StartGame(int levelNumber)
@@ -88,6 +96,11 @@ public class GameManager : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
+        if (CurrentState == GameState.Paused)
+        {
+            Time.timeScale = 1f;
+        }
+
         CurrentState = GameState.MainMenu;
         SceneManager.LoadScene("MainMenu");
         uiManager.ShowMainMenu();
