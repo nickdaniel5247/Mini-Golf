@@ -200,6 +200,11 @@ PrefabInstance:
       propertyPath: spawnPoint
       value: 
       objectReference: {fileID: 211829166}
+    - target: {fileID: 6429975001804520581, guid: 81819ee738ac04891b70c5f947f37f1c,
+        type: 3}
+      propertyPath: strokeLimit
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7082767886870250125, guid: 81819ee738ac04891b70c5f947f37f1c,
         type: 3}
       propertyPath: m_AnchorMax.y
