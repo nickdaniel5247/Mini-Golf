@@ -71,7 +71,7 @@ public class UIManager : MonoBehaviour
 
     #region UI Panel Management
 
-    private void SetLevelLock(int level, bool isUnlocked)
+    public void SetLevelLock(int level, bool isUnlocked)
     {
         if (level < 0 || level >= levelButtons.Count)
         {

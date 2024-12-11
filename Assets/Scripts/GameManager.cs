@@ -158,6 +158,7 @@ public class GameManager : MonoBehaviour
         {
             playerData.currentLevel = nextLevel;
             SavePlayerData();
+            uiManager.SetLevelLock(nextLevel, true);
         }
     }
 
