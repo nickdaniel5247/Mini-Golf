@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     static public float sfxVolume = 1f;
 
     private const int totalLevels = 7;
+    static private int currentLevel = 0;
 
     [Header("UI Manager Object (Assign in Inspector)")]
     public GameObject uiManagerObject;
@@ -78,6 +79,7 @@ public class GameManager : MonoBehaviour
         }
 
         CurrentState = GameState.Playing;
+        currentLevel = levelNumber;
         StartCoroutine(LoadLevelAsync("Level" + levelNumber));
 
         //May not be necessary, managers have switched to instances now
@@ -145,7 +147,13 @@ public class GameManager : MonoBehaviour
 
     public void UnlockNextLevel()
     {
-        int nextLevel = playerData.currentLevel + 1;
+        if (CurrentState != GameState.Playing)
+        {
+            return;
+        }
+
+        int nextLevel = currentLevel + 1;
+
         if (nextLevel < totalLevels && playerData.currentLevel < nextLevel)
         {
             playerData.currentLevel = nextLevel;

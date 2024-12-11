@@ -13,6 +13,11 @@ public class Ball : MonoBehaviour
     private const int mouseDownCode = 0;
     private const float speedEpsilon = 0.01f;
 
+    private const string holeObjectName = "Hole";
+    private const string managersObjectName = "Managers";
+
+    private GameManager gameManager;
+
     public float maxForce = 350f;
     public float deaccelerationStart = 0.1f;
     public float deaccelerationSpeed = 2.5f;
@@ -31,6 +36,20 @@ public class Ball : MonoBehaviour
         if (!cinemachineFreeLook)
         {
             Debug.LogError("No cinemachine free look found in children of golf ball object.");
+        }
+
+        GameObject managersObject = GameObject.Find(managersObjectName);
+
+        if (!managersObject)
+        {
+            Debug.LogError("Can't find Managers object.");
+        }
+
+        gameManager = managersObject.GetComponentInChildren<GameManager>();
+
+        if (!gameManager)
+        {
+            Debug.LogError("Can't find GameManager script in Managers's children.");
         }
     }
 
@@ -81,5 +100,15 @@ public class Ball : MonoBehaviour
 
         freelookCamForward = Vector3.ClampMagnitude(freelookCamForward, maxForce);
         rigidBody.AddForce(freelookCamForward);
+    }
+
+    void OnTriggerEnter(Collider hole)
+    {
+        if (hole.name != holeObjectName)
+        {
+            return;
+        }
+
+        gameManager.LevelCompleted();
     }
 }
