@@ -27,7 +27,9 @@ public class GameManager : MonoBehaviour
     public GameObject ball;
     public GameObject ballCamera;
     
+    [Header("Level specific settings (Assign in Inspector)")]
     public GameObject spawnPoint;
+    public int strokeLimit = 3;
 
     private void Awake()
     {

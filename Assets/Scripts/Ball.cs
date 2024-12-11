@@ -17,6 +17,7 @@ public class Ball : MonoBehaviour
     private const string managersObjectName = "Managers";
 
     private GameManager gameManager;
+    private int strokeCount = 0;
 
     public float maxForce = 350f;
     public float deaccelerationStart = 0.1f;
@@ -81,13 +82,18 @@ public class Ball : MonoBehaviour
             rigidBody.velocity = new Vector3(Mathf.Lerp(rigidBody.velocity.x, 0, speed), 0, Mathf.Lerp(rigidBody.velocity.z, 0, speed));
             rigidBody.angularVelocity = new Vector3(Mathf.Lerp(rigidBody.angularVelocity.x, 0, speed), 0, Mathf.Lerp(rigidBody.angularVelocity.z, 0, speed));
         }
+
+        if (strokeCount == gameManager.strokeLimit && rigidBody.IsSleeping())
+        {
+            gameManager.RestartLevel();
+        }
     }
 
     void shoot(float mouseOffset)
     {
-        if (!rigidBody.IsSleeping())
+        if (!rigidBody.IsSleeping() || strokeCount == gameManager.strokeLimit)
         {
-            //We are in motion, no further movement should be done
+            //We are in motion or reached our shoot limit, no further movement should be done
             return;
         }
 
@@ -100,6 +106,8 @@ public class Ball : MonoBehaviour
 
         freelookCamForward = Vector3.ClampMagnitude(freelookCamForward, maxForce);
         rigidBody.AddForce(freelookCamForward);
+
+        ++strokeCount;
     }
 
     void OnTriggerEnter(Collider hole)
