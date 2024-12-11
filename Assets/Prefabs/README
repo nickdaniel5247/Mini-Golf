@@ -3,3 +3,5 @@ IMPORTANT:
 - Managers must be included in every scene. It contains GameManager which will take care of spawning the ball and camera when requested. When adding to scene, make sure to create an Empty game object to act as spawn point. To make sure it is used, go to Managers -> GameManager -> Spawn Point and drop/select it there.
 
 - When play testing a scene, you can manually add in Ball and Main Camera together. Remove default Main Camera from the scene and use provided prefab instead when doing so. Make sure to not have Managers in scene during this.
+
+- The hole prefab is used as a collider for the hole. It allows the ball to recognize it made contact inside the hole. Do not change its name when placing it in the scene. Alongside, the mesh renderer on it can be enabled when placing it to better visualize where it really is in 3D space; just turn it off when finished finding a good position.
