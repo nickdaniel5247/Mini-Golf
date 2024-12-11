@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour
             break;
         case GameState.Playing:
             uiManager.ShowHUD();
+            uiManager.UpdateLevelNumber(currentLevel + 1); //+1 because of 0-based indexing
             ball = Instantiate(ball, spawnPoint.transform.position, spawnPoint.transform.rotation);
             ballCamera = Instantiate(ballCamera, spawnPoint.transform.position, spawnPoint.transform.rotation);
             break;
@@ -83,11 +84,6 @@ public class GameManager : MonoBehaviour
         CurrentState = GameState.Playing;
         currentLevel = levelNumber;
         StartCoroutine(LoadLevelAsync("Level" + levelNumber));
-
-        //May not be necessary, managers have switched to instances now
-        //uiManager.ShowHUD();
-        //uiManager.UpdateLevelNumber(currentLevel); <- This needs to be accommodated for however
-        //Best option would be public variable in UI Manager assigned in editor for each level
     }
 
     public void ReturnToMainMenu()

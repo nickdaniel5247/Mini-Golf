@@ -67,6 +67,8 @@ public class UIManager : MonoBehaviour
             bool isUnlocked = gameManager.IsLevelUnlocked(i);
             SetLevelLock(i, isUnlocked);
         }
+
+        UpdateStrokeCount(0);
     }
 
     #region UI Panel Management
@@ -176,7 +178,7 @@ public class UIManager : MonoBehaviour
     public void UpdateStrokeCount(int strokes)
     {
         if (strokeCountText)
-            strokeCountText.text = "Strokes: " + strokes;
+            strokeCountText.text = "Strokes: " + strokes + "/" + gameManager.strokeLimit;
         else
             Debug.LogWarning("StrokeCountText not assigned in UIManager.");
     }

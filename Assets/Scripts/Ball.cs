@@ -17,6 +17,7 @@ public class Ball : MonoBehaviour
     private const string managersObjectName = "Managers";
 
     private GameManager gameManager;
+    private UIManager uiManager;
     private int strokeCount = 0;
 
     public float maxForce = 350f;
@@ -51,6 +52,13 @@ public class Ball : MonoBehaviour
         if (!gameManager)
         {
             Debug.LogError("Can't find GameManager script in Managers's children.");
+        }
+
+        uiManager = managersObject.GetComponentInChildren<UIManager>();
+
+        if (!uiManager)
+        {
+            Debug.LogError("Can't find UIManager script in Managers's children.");
         }
     }
 
@@ -108,6 +116,7 @@ public class Ball : MonoBehaviour
         rigidBody.AddForce(freelookCamForward);
 
         ++strokeCount;
+        uiManager.UpdateStrokeCount(strokeCount);
     }
 
     void OnTriggerEnter(Collider hole)
