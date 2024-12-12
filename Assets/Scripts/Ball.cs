@@ -25,6 +25,7 @@ public class Ball : MonoBehaviour
     private Vector3 lastShotPos;
 
     private bool levelCompleted = false;
+    private bool mouseDown = false;
 
     public float maxForce = 350f;
     public float deaccelerationStart = 0.1f;
@@ -81,19 +82,29 @@ public class Ball : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.CurrentState != GameManager.GameState.Playing)
+        {
+            return;
+        }
+
+        //mouseDown variable is used to recognize that we processed this input rather than the UI
         if (Input.GetMouseButtonDown(mouseDownCode))
         {
             startingMouseHeight = Input.mousePosition.y;
 
             cinemachineFreeLook.m_XAxis.m_InputAxisName = "";
             cinemachineFreeLook.m_YAxis.m_InputAxisName = "";
-        }
-        else if (Input.GetMouseButtonUp(mouseDownCode))
+
+            mouseDown = true;
+        } //UI only gives back mouse up so we check we processed a down here
+        else if (Input.GetMouseButtonUp(mouseDownCode) && mouseDown)
         {
             shoot(startingMouseHeight - Input.mousePosition.y);
 
             cinemachineFreeLook.m_XAxis.m_InputAxisName = "Mouse X";
             cinemachineFreeLook.m_YAxis.m_InputAxisName = "Mouse Y";
+
+            mouseDown = false;
         }
     }
 
