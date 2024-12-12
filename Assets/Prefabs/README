@@ -1,7 +1,11 @@
-IMPORTANT:
+IMPORTANT (RELATED TO LEVEL DESIGN):
 
-- Managers must be included in every scene. It contains GameManager which will take care of spawning the ball and camera when requested. When adding to scene, make sure to create an Empty game object to act as spawn point. To make sure it is used, go to Managers -> GameManager -> Spawn Point and drop/select it there.
+- Managers must be included in every scene. It contains GameManager which will take care of spawning the ball and camera when requested. When adding to the scene, make sure to create an Empty game object to act as spawn point. To make sure it is used, go to Managers -> GameManager -> Spawn Point and drop/select it there. Do this once it is in the scene and from the Hierachy, not the prefab in the Prefabs folder.
 
-- When play testing a scene, you can manually add in Ball and Main Camera together. Remove default Main Camera from the scene and use provided prefab instead when doing so. Make sure to not have Managers in scene during this.
+- The hole prefab is used as a collider for the hole. It allows the ball to recognize it made contact inside the hole. Do not change its name when placing it in the scene. Simply place it in the hole area and center it inside, do not scale or rotate it.
 
-- The hole prefab is used as a collider for the hole. It allows the ball to recognize it made contact inside the hole. Do not change its name when placing it in the scene. Alongside, the mesh renderer on it can be enabled when placing it to better visualize where it really is in 3D space; just turn it off when finished finding a good position.
+- Each scene must also have a Bounds object. Make a cube and scale it to fit as the "bounds" of the scene. Once done, delete/disable the mesh renderer.
+
+- The global volume prefab should also be brought into the scene to allow for post processing. Do not change its settings when making scenes.
+
+- To test any scene, you must have it set up correctly and enter it from the main menu. There is currently not quicker way to play test.
