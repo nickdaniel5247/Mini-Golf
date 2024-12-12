@@ -161,8 +161,11 @@ public class Ball : MonoBehaviour
         //Can't shoot backwards
         mouseOffset = math.abs(mouseOffset);
 
-        //Only shoot in Z direction which will be forward relative to camera
+        //Shoot in forward direction relative to camera
         Vector3 freelookCamForward = cinemachineFreeLook.State.FinalOrientation.normalized * Vector3.forward;
+        
+        //Remove height dimension and scale by mouse delta
+        freelookCamForward.y = 0f;
         freelookCamForward *= mouseOffset;
 
         freelookCamForward = Vector3.ClampMagnitude(freelookCamForward, maxForce);
