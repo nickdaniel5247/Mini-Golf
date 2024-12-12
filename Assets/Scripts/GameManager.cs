@@ -96,11 +96,7 @@ public class GameManager : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
-        if (CurrentState == GameState.Paused)
-        {
-            Time.timeScale = 1f;
-        }
-
+        Time.timeScale = 1f;
         CurrentState = GameState.MainMenu;
         SceneManager.LoadScene("MainMenu");
         uiManager.ShowMainMenu();
