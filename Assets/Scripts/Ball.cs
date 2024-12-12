@@ -14,12 +14,15 @@ public class Ball : MonoBehaviour
     private const float speedEpsilon = 0.01f;
 
     private const string holeObjectName = "Hole";
+    private const string boundsObjectName = "Bounds";
     private const string managersObjectName = "Managers";
 
     private GameManager gameManager;
     private UIManager uiManager;
     private AudioManager audioManager;
+
     private int strokeCount = 0;
+    private Vector3 lastShotPos;
 
     private bool levelCompleted = false;
 
@@ -71,6 +74,9 @@ public class Ball : MonoBehaviour
         {
             Debug.LogError("No AudioManager instance is set.");
         }
+
+        //Not neccessary but just precautionary
+        lastShotPos = gameManager.spawnPoint.transform.position;
     }
 
     void Update()
@@ -116,6 +122,8 @@ public class Ball : MonoBehaviour
             return;
         }
 
+        lastShotPos = transform.position;
+
         //Can't shoot backwards
         mouseOffset = math.abs(mouseOffset);
 
@@ -148,5 +156,17 @@ public class Ball : MonoBehaviour
         }
 
         StartCoroutine(completedLevel());
+    }
+
+    void OnTriggerExit(Collider bounds)
+    {
+        if (bounds.name != boundsObjectName)
+        {
+            return;
+        }
+
+        gameObject.transform.position = lastShotPos;
+        rigidBody.velocity = Vector3.zero;
+        rigidBody.angularVelocity = Vector3.zero;
     }
 }
