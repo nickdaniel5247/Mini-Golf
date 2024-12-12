@@ -18,11 +18,15 @@ public class Ball : MonoBehaviour
 
     private GameManager gameManager;
     private UIManager uiManager;
+    private AudioManager audioManager;
     private int strokeCount = 0;
+
+    private bool levelCompleted = false;
 
     public float maxForce = 350f;
     public float deaccelerationStart = 0.1f;
     public float deaccelerationSpeed = 2.5f;
+    public float levelCompleteWaitTime = 2f; //Wait time before ending level
 
     void Awake()
     {
@@ -59,6 +63,13 @@ public class Ball : MonoBehaviour
         if (!uiManager)
         {
             Debug.LogError("Can't find UIManager script in Managers's children.");
+        }
+
+        audioManager = AudioManager.Instance;
+
+        if (!audioManager)
+        {
+            Debug.LogError("No AudioManager instance is set.");
         }
     }
 
@@ -99,7 +110,7 @@ public class Ball : MonoBehaviour
 
     void shoot(float mouseOffset)
     {
-        if (!rigidBody.IsSleeping() || strokeCount == gameManager.strokeLimit)
+        if (!rigidBody.IsSleeping() || strokeCount == gameManager.strokeLimit || levelCompleted)
         {
             //We are in motion or reached our shoot limit, no further movement should be done
             return;
@@ -117,6 +128,16 @@ public class Ball : MonoBehaviour
 
         ++strokeCount;
         uiManager.UpdateStrokeCount(strokeCount);
+
+        audioManager.PlaySoundEffect(audioManager.ballHit);
+    }
+
+    private IEnumerator completedLevel()
+    {
+        levelCompleted = true;
+        audioManager.PlaySoundEffect(audioManager.holeSound);
+        yield return new WaitForSeconds(levelCompleteWaitTime);
+        gameManager.LevelCompleted();
     }
 
     void OnTriggerEnter(Collider hole)
@@ -126,6 +147,6 @@ public class Ball : MonoBehaviour
             return;
         }
 
-        gameManager.LevelCompleted();
+        StartCoroutine(completedLevel());
     }
 }

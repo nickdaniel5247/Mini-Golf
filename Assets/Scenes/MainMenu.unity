@@ -271,6 +271,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundMusic: {fileID: 8300000, guid: 61488ab0bd06ed345ba03a38d8b4dc28, type: 3}
   buttonClickSound: {fileID: 8300000, guid: f32c95c96d480422ebf7072d3b788cff, type: 3}
+  ballHit: {fileID: 8300000, guid: af0d19a32f1946c4ba987d4347944722, type: 3}
+  holeSound: {fileID: 8300000, guid: c353e678c2811b6408a7a245219e107a, type: 3}
 --- !u!4 &1357914705
 Transform:
   m_ObjectHideFlags: 0

@@ -895,6 +895,7 @@ MonoBehaviour:
   maxForce: 500
   deaccelerationStart: 0.1
   deaccelerationSpeed: 2.5
+  levelCompleteWaitTime: 2
 --- !u!54 &5121421516738742450
 Rigidbody:
   m_ObjectHideFlags: 0

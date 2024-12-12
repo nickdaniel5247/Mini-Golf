@@ -10,6 +10,9 @@ public class AudioManager : MonoBehaviour
     public AudioClip backgroundMusic;
     public AudioClip buttonClickSound;
 
+    public AudioClip ballHit;
+    public AudioClip holeSound;
+
     private void Awake()
     {
         if (Instance == null)
