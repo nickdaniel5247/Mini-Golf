@@ -142,7 +142,7 @@ public class Ball : MonoBehaviour
             rigidBody.angularVelocity = new Vector3(Mathf.Lerp(rigidBody.angularVelocity.x, 0, speed), 0, Mathf.Lerp(rigidBody.angularVelocity.z, 0, speed));
         }
 
-        if (strokeCount == gameManager.strokeLimit && rigidBody.IsSleeping())
+        if (strokeCount == gameManager.strokeLimit && rigidBody.IsSleeping() && !levelCompleted)
         {
             gameManager.RestartLevel();
         }
