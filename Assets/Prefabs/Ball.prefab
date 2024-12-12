@@ -892,6 +892,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eddd127efdab455fb5777339353ad05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  directionPrefab: {fileID: 2066573313450768411, guid: c3fae9601a55d4ba89299929264df00e,
+    type: 3}
   maxForce: 500
   deaccelerationStart: 0.1
   deaccelerationSpeed: 2.5

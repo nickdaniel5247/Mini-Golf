@@ -21,6 +21,10 @@ public class Ball : MonoBehaviour
     private UIManager uiManager;
     private AudioManager audioManager;
 
+    public GameObject directionPrefab;
+    private GameObject direction;
+    public float directionLightRange = 5f;
+
     private int strokeCount = 0;
     private Vector3 lastShotPos;
 
@@ -82,9 +86,27 @@ public class Ball : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.CurrentState != GameManager.GameState.Playing)
+        if (GameManager.CurrentState != GameManager.GameState.Playing || !rigidBody.IsSleeping())
         {
             return;
+        }
+
+        if (!direction)
+        {
+            this.transform.rotation = Quaternion.identity;
+            direction = Instantiate(directionPrefab, this.transform);
+            direction.GetComponent<Light>().range = 0;
+        } 
+        
+        Vector3 freelookCamForward = cinemachineFreeLook.State.FinalOrientation * Vector3.forward;
+        //With unit vector of (0, 1), find angle to freelookcam direction
+        float angle = Vector2.SignedAngle(new Vector2(freelookCamForward.x, freelookCamForward.z), new Vector2(0f, 1f));
+        direction.transform.eulerAngles = new Vector3(0f, angle, 0f);
+
+        if (mouseDown)
+        {
+            float percent = Mathf.InverseLerp(0, Screen.height, Mathf.Abs(startingMouseHeight - Input.mousePosition.y));
+            direction.GetComponent<Light>().range = percent * directionLightRange;
         }
 
         //mouseDown variable is used to recognize that we processed this input rather than the UI
@@ -105,6 +127,7 @@ public class Ball : MonoBehaviour
             cinemachineFreeLook.m_YAxis.m_InputAxisName = "Mouse Y";
 
             mouseDown = false;
+            Destroy(direction);
         }
     }
 
