@@ -102,18 +102,21 @@ public class UIManager : MonoBehaviour
     public void ShowMainMenu()
     {
         HideAllPanels();
+        Cursor.visible = true;
         if (mainMenuPanel) mainMenuPanel.SetActive(true);
     }
 
     public void ShowSettingsMenu()
     {
         HideAllPanels();
+        Cursor.visible = true;
         if (settingsPanel) settingsPanel.SetActive(true);
     }
 
     public void ShowLevelSelection()
     {
         HideAllPanels();
+        Cursor.visible = true;
         if (levelSelectionPanel) levelSelectionPanel.SetActive(true);
     }
 
@@ -127,6 +130,7 @@ public class UIManager : MonoBehaviour
     {
         if (pauseMenuPanel)
         {
+            Cursor.visible = true;
             pauseMenuPanel.SetActive(true);
             Time.timeScale = 0f; // Pause the game
         }
@@ -140,6 +144,7 @@ public class UIManager : MonoBehaviour
     {
         if (pauseMenuPanel)
         {
+            Cursor.visible = false;
             pauseMenuPanel.SetActive(false);
             Time.timeScale = 1f; // Resume the game
         }
@@ -169,6 +174,7 @@ public class UIManager : MonoBehaviour
         if (hudPanel) hudPanel.SetActive(false);
         if (pauseMenuPanel) pauseMenuPanel.SetActive(false);
         if (loadingScreenPanel) loadingScreenPanel.SetActive(false);
+        Cursor.visible = false;
     }
 
     #endregion
