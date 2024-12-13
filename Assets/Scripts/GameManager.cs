@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     static public float musicVolume = 1f;
     static public float sfxVolume = 1f;
 
-    private const int totalLevels = 7;
+    private const int totalLevels = 5;
     static private int currentLevel = 0;
 
     [Header("UI Manager Object (Assign in Inspector)")]
